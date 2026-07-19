@@ -1,12 +1,79 @@
 ﻿<Window x:Class="Photobooth.App.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Photobooth.App"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Photobooth"
+        WindowStyle="None"
+        WindowState="Maximized"
+        ResizeMode="NoResize"
+        Topmost="True"
+        Background="{StaticResource KioskBackground}"
+        KeyDown="Window_KeyDown">
 
+    <Grid Margin="48">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Brand -->
+        <TextBlock Grid.Row="0"
+                   Text="PHOTOBOOTH"
+                   FontFamily="Segoe UI Semibold"
+                   FontSize="42"
+                   FontWeight="SemiBold"
+                   Foreground="{StaticResource BrandForeground}"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,24" />
+
+        <!-- Camera preview placeholder -->
+        <Border Grid.Row="1"
+                Background="{StaticResource PreviewBackground}"
+                BorderBrush="{StaticResource PreviewBorder}"
+                BorderThickness="2"
+                CornerRadius="4"
+                ClipToBounds="True">
+            <Grid>
+                <TextBlock x:Name="PreviewPlaceholder"
+                           Text="Camera preview"
+                           FontFamily="Segoe UI"
+                           FontSize="28"
+                           Foreground="{StaticResource MutedForeground}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+
+                <!-- Live feed / captured frame will replace this Image later -->
+                <Image x:Name="PreviewImage"
+                       Stretch="UniformToFill"
+                       Visibility="Collapsed" />
+            </Grid>
+        </Border>
+
+        <!-- Guest prompt -->
+        <TextBlock Grid.Row="2"
+                   x:Name="StatusText"
+                   Text="Look at the camera, then tap to capture"
+                   FontFamily="Segoe UI"
+                   FontSize="26"
+                   Foreground="{StaticResource BrandForeground}"
+                   HorizontalAlignment="Center"
+                   Margin="0,32,0,28"
+                   TextAlignment="Center" />
+
+        <!-- Capture button — large enough for touch -->
+        <Button Grid.Row="3"
+                x:Name="CaptureButton"
+                Content="TAKE PHOTO"
+                Height="88"
+                MinWidth="320"
+                MaxWidth="480"
+                HorizontalAlignment="Center"
+                FontFamily="Segoe UI Semibold"
+                FontSize="28"
+                FontWeight="SemiBold"
+                Cursor="Hand"
+                Click="CaptureButton_Click"
+                Style="{StaticResource CaptureButtonStyle}" />
     </Grid>
 </Window>

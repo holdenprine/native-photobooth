@@ -1,9 +1,48 @@
 ﻿<Application x:Class="Photobooth.App.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Photobooth.App"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- Warm charcoal kiosk palette — preview-first, not purple/cream defaults -->
+        <SolidColorBrush x:Key="KioskBackground" Color="#1A1816" />
+        <SolidColorBrush x:Key="BrandForeground" Color="#F5F0E8" />
+        <SolidColorBrush x:Key="MutedForeground" Color="#9A9288" />
+        <SolidColorBrush x:Key="PreviewBackground" Color="#0E0D0C" />
+        <SolidColorBrush x:Key="PreviewBorder" Color="#3A3632" />
+        <SolidColorBrush x:Key="CaptureIdle" Color="#E8A54B" />
+        <SolidColorBrush x:Key="CaptureHover" Color="#F0B85C" />
+        <SolidColorBrush x:Key="CapturePressed" Color="#C8892E" />
+        <SolidColorBrush x:Key="CaptureForeground" Color="#1A1816" />
+
+        <Style x:Key="CaptureButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource CaptureIdle}" />
+            <Setter Property="Foreground" Value="{StaticResource CaptureForeground}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="48,0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Root"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="{StaticResource CaptureHover}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="{StaticResource CapturePressed}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Root" Property="Opacity" Value="0.45" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
