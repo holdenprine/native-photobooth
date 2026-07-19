@@ -13,6 +13,10 @@
         <SolidColorBrush x:Key="CaptureHover" Color="#F0B85C" />
         <SolidColorBrush x:Key="CapturePressed" Color="#C8892E" />
         <SolidColorBrush x:Key="CaptureForeground" Color="#1A1816" />
+        <SolidColorBrush x:Key="CloseIdle" Color="#2E2B28" />
+        <SolidColorBrush x:Key="CloseHover" Color="#3A3632" />
+        <SolidColorBrush x:Key="ClosePressed" Color="#1F1D1B" />
+        <SolidColorBrush x:Key="CloseBorder" Color="#5A534C" />
 
         <Style x:Key="CaptureButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource CaptureIdle}" />
@@ -35,6 +39,42 @@
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="Root" Property="Background" Value="{StaticResource CapturePressed}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Root" Property="Opacity" Value="0.45" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Secondary / quieter than capture so guests don't tap it by mistake -->
+        <Style x:Key="CloseButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource CloseIdle}" />
+            <Setter Property="Foreground" Value="{StaticResource MutedForeground}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="{StaticResource CloseBorder}" />
+            <Setter Property="Padding" Value="36,0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Root"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="{StaticResource CloseHover}" />
+                                <Setter Property="Foreground" Value="{StaticResource BrandForeground}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="{StaticResource ClosePressed}" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter TargetName="Root" Property="Opacity" Value="0.45" />

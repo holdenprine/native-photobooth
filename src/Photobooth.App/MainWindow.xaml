@@ -15,6 +15,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!-- Brand -->
@@ -27,13 +28,18 @@
                    HorizontalAlignment="Center"
                    Margin="0,0,0,24" />
 
-        <!-- Camera preview placeholder -->
-        <Border Grid.Row="1"
+        <!-- Camera preview — swipe horizontally to cycle filters -->
+        <Border x:Name="PreviewArea"
+                Grid.Row="1"
                 Background="{StaticResource PreviewBackground}"
                 BorderBrush="{StaticResource PreviewBorder}"
                 BorderThickness="2"
                 CornerRadius="4"
-                ClipToBounds="True">
+                ClipToBounds="True"
+                Cursor="Hand"
+                MouseLeftButtonDown="PreviewArea_MouseLeftButtonDown"
+                MouseLeftButtonUp="PreviewArea_MouseLeftButtonUp"
+                LostMouseCapture="PreviewArea_LostMouseCapture">
             <Grid>
                 <TextBlock x:Name="PreviewPlaceholder"
                            Text="Camera preview"
@@ -47,13 +53,29 @@
                 <Image x:Name="PreviewImage"
                        Stretch="UniformToFill"
                        Visibility="Collapsed" />
+
+                <!-- Current filter name — shows briefly on start / swipe -->
+                <Border x:Name="FilterNameOverlay"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Stretch"
+                        Background="#990E0D0C"
+                        Padding="24,16"
+                        Visibility="Collapsed">
+                    <TextBlock x:Name="FilterNameText"
+                               FontFamily="Segoe UI Semibold"
+                               FontSize="24"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource BrandForeground}"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center" />
+                </Border>
             </Grid>
         </Border>
 
         <!-- Guest prompt -->
         <TextBlock Grid.Row="2"
                    x:Name="StatusText"
-                   Text="Look at the camera, then tap to capture"
+                   Text="Swipe the preview to change filters, then tap to capture"
                    FontFamily="Segoe UI"
                    FontSize="26"
                    Foreground="{StaticResource BrandForeground}"
@@ -75,5 +97,21 @@
                 Cursor="Hand"
                 Click="CaptureButton_Click"
                 Style="{StaticResource CaptureButtonStyle}" />
+
+        <!-- Close — touch exit; Esc still works via Window_KeyDown -->
+        <Button Grid.Row="4"
+                x:Name="CloseButton"
+                Content="CLOSE"
+                Height="64"
+                MinWidth="200"
+                MaxWidth="320"
+                HorizontalAlignment="Center"
+                FontFamily="Segoe UI Semibold"
+                FontSize="22"
+                FontWeight="SemiBold"
+                Cursor="Hand"
+                Click="CloseButton_Click"
+                Style="{StaticResource CloseButtonStyle}"
+                Margin="0,16,0,0" />
     </Grid>
 </Window>
