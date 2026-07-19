@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Photobooth.App/Photobooth.App.csproj" />
+    <Project Path="src/Photobooth.Core/Photobooth.Core.csproj" />
+    <Project Path="src/Photobooth.LocalServer/Photobooth.LocalServer.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Photobooth.Tests/Photobooth.Tests.csproj" />
+  </Folder>
+</Solution>
