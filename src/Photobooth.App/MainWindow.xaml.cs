@@ -30,7 +30,7 @@ public partial class MainWindow : Window
 
         _filterNameHideTimer = new DispatcherTimer
         {
-            Interval = TimeSpan.FromSeconds(3),
+            Interval = TimeSpan.FromSeconds(0.05),
         };
         _filterNameHideTimer.Tick += (_, _) =>
         {
